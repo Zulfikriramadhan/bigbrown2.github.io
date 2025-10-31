@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Big Brown Ternate - Kopi & Tempat Nongkrong Terbaik</title>
+    <!-- Muat Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Muat Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Mengatur font dasar dan warna tema */
+        :root {
+            --color-primary: #8B4513; /* Saddle Brown - Cokelat Utama */
+            --color-secondary: #D2B48C; /* Tan - Krem */
+            --color-accent: #A0522D; /* Sienna - Cokelat Gelap */
+        }
+        .bg-primary { background-color: var(--color-primary); }
+        .text-primary { color: var(--color-primary); }
+        .bg-secondary { background-color: var(--color-secondary); }
+        .bg-accent { background-color: var(--color-accent); }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F4F0; /* Off-white */
+        }
+
+        /* Styling tambahan untuk menu tab */
+        .tab-button.active {
+            background-color: var(--color-primary);
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styling tambahan untuk spinner loading */
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #fff;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="scroll-smooth">
+
+    <!-- Header & Navigasi -->
+    <header class="sticky top-0 z-50 bg-white shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-3xl font-extrabold text-accent flex items-center">
+                <i data-lucide="coffee" class="w-8 h-8 mr-2 text-primary"></i>
+                Big Brown
+            </a>
+            <nav id="nav-menu" class="hidden md:flex space-x-6 text-gray-700 font-medium">
+                <a href="#home" class="hover:text-primary transition duration-300">Beranda</a>
+                <a href="#menu" class="hover:text-primary transition duration-300">Menu</a>
+                <a href="#lokasi" class="hover:text-primary transition duration-300">Lokasi</a>
+                <a href="#kontak" class="hover:text-primary transition duration-300">Kontak</a>
+            </nav>
+            <!-- Tombol Hamburger untuk Mobile -->
+            <button id="hamburger" class="md:hidden p-2 rounded-lg text-primary hover:bg-secondary">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <!-- Menu Mobile Overlay -->
+        <div id="mobile-menu-overlay" class="hidden fixed inset-0 bg-white bg-opacity-95 z-40 flex flex-col items-center justify-center space-y-6 md:hidden">
+            <button id="close-menu" class="absolute top-4 right-4 p-2 rounded-lg text-primary hover:bg-secondary">
+                <i data-lucide="x" class="w-8 h-8"></i>
+            </button>
+            <a href="#home" class="text-2xl font-semibold text-accent hover:text-primary transition duration-300" onclick="closeMobileMenu()">Beranda</a>
+            <a href="#menu" class="text-2xl font-semibold text-accent hover:text-primary transition duration-300" onclick="closeMobileMenu()">Menu</a>
+            <a href="#lokasi" class="text-2xl font-semibold text-accent hover:text-primary transition duration-300" onclick="closeMobileMenu()">Lokasi</a>
+            <a href="#kontak" class="text-2xl font-semibold text-accent hover:text-primary transition duration-300" onclick="closeMobileMenu()">Kontak</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Bagian Beranda (Hero) -->
+        <section id="home" class="relative overflow-hidden pt-20 pb-16 md:pt-32 md:pb-24 bg-secondary">
+            <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-8">
+                <div class="md:w-1/2 text-center md:text-left">
+                    <h1 class="text-5xl md:text-7xl font-extrabold leading-tight text-accent mb-4">
+                        Nongkrong Santai di <span class="text-primary">Big Brown Ternate</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-800 mb-8">
+                        Tempat terbaik untuk menikmati Kopi Maluku yang otentik dan camilan lezat dengan pemandangan kota Ternate yang memukau.
+                    </p>
+                    <a href="#menu" class="inline-block px-8 py-3 bg-primary text-white font-bold rounded-xl shadow-lg hover:bg-accent transition duration-300 transform hover:scale-105">
+                        Lihat Menu Kami
+                    </a>
+                </div>
+                <div class="md:w-1/2">
+                    <!-- Placeholder Gambar Cafe -->
+                    <div class="w-full aspect-square md:aspect-[4/3] rounded-2xl shadow-2xl overflow-hidden bg-gray-300">
+                        <img src="https://placehold.co/800x600/D2B48C/8B4513?text=Big+Brown+Ternate+Cafe" alt="Interior kafe yang nyaman dengan kopi" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+            <!-- Bentuk dekoratif di latar belakang -->
+            <div class="absolute top-0 right-0 w-48 h-48 bg-primary opacity-10 rounded-full blur-3xl -z-10"></div>
+            <div class="absolute bottom-0 left-0 w-64 h-64 bg-accent opacity-10 rounded-full blur-3xl -z-10"></div>
+        </section>
+
+        <!-- Bagian Menu Interaktif -->
+        <section id="menu" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center text-accent mb-4">Pilihan Menu Terbaik</h2>
+                <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Dari kopi lokal khas Ternate hingga minuman segar dan camilan pendamping, kami punya segalanya untuk Anda.</p>
+
+                <!-- Tab Menu -->
+                <div class="flex justify-center mb-10 space-x-3 md:space-x-6">
+                    <button class="tab-button active px-6 py-2 rounded-full font-semibold text-sm md:text-base transition duration-300" data-category="kopi">
+                        <i data-lucide="coffee" class="w-4 h-4 inline mr-1"></i> Kopi
+                    </button>
+                    <button class="tab-button px-6 py-2 rounded-full font-semibold text-sm md:text-base transition duration-300 text-primary bg-secondary hover:bg-primary hover:text-white" data-category="nonkopi">
+                        <i data-lucide="milk" class="w-4 h-4 inline mr-1"></i> Non-Kopi
+                    </button>
+                    <button class="tab-button px-6 py-2 rounded-full font-semibold text-sm md:text-base transition duration-300 text-primary bg-secondary hover:bg-primary hover:text-white" data-category="camilan">
+                        <i data-lucide="cake" class="w-4 h-4 inline mr-1"></i> Camilan
+                    </button>
+                </div>
+
+                <!-- Konten Menu -->
+                <div id="menu-content" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Data Menu akan diisi oleh JavaScript -->
+                </div>
+
+                <!-- Tombol Saranan Pintar (Gemini Integration) -->
+                <button id="smart-suggestion-btn" class="mt-12 mx-auto flex items-center px-6 py-3 bg-primary text-white font-bold rounded-xl shadow-lg hover:bg-accent transition duration-300 transform hover:scale-105">
+                    <i data-lucide="sparkles" class="w-5 h-5 mr-2"></i> ✨ Saranan Menu Pintar
+                </button>
+            </div>
+        </section>
+
+        <!-- Bagian Lokasi & Jam Buka -->
+        <section id="lokasi" class="py-16 md:py-24 bg-secondary">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center text-accent mb-4">Temukan Kami</h2>
+                <p class="text-center text-gray-800 mb-12 max-w-3xl mx-auto">Big Brown Ternate terletak di lokasi strategis yang mudah dijangkau, sempurna untuk bersantai atau bekerja.</p>
+                
+                <div class="flex flex-col md:flex-row gap-8">
+                    <!-- Informasi Lokasi -->
+                    <div class="md:w-1/2 p-6 bg-white rounded-xl shadow-xl">
+                        <h3 class="text-2xl font-semibold text-primary mb-4 flex items-center">
+                            <i data-lucide="map-pin" class="w-6 h-6 mr-2"></i> Detail Lokasi
+                        </h3>
+                        <p class="text-gray-700 mb-4">
+                            Jl. Raya Ternate - Sofifi No. 12, Kel. Kalumpang, Kota Ternate Utara, Maluku Utara. (Dekat dengan Bundaran Kota)
+                        </p>
+                        <div class="space-y-3">
+                            <p class="flex items-center text-lg text-gray-800">
+                                <i data-lucide="clock" class="w-5 h-5 mr-3 text-accent"></i> 
+                                **Jam Buka:** Setiap Hari (09:00 - 23:00 WIT)
+                            </p>
+                            <p class="flex items-center text-lg text-gray-800">
+                                <i data-lucide="wifi" class="w-5 h-5 mr-3 text-accent"></i> 
+                                **Fasilitas:** Wi-Fi Kencang, Area AC, Mushola, Parkir Luas.
+                            </p>
+                        </div>
+                        <a href="https://maps.app.goo.gl/example" target="_blank" class="mt-6 inline-flex items-center text-primary font-semibold hover:text-accent transition duration-300">
+                            Lihat di Google Maps 
+                            <i data-lucide="external-link" class="w-4 h-4 ml-1"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Peta Placeholder -->
+                    <div class="md:w-1/2 rounded-xl overflow-hidden shadow-xl">
+                        <img src="https://placehold.co/800x400/8B4513/FFFFFF?text=Peta+Ternate+Location" alt="Peta menunjukkan lokasi Big Brown Ternate." class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian Kontak/Formulir -->
+        <section id="kontak" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center text-accent mb-4">Hubungi Kami</h2>
+                <p class="text-center text-gray-600 mb-12 max-w-xl mx-auto">Kirimkan pertanyaan, saran, atau permintaan pemesanan tempat Anda melalui formulir di bawah ini.</p>
+
+                <div class="max-w-lg mx-auto p-8 bg-secondary rounded-2xl shadow-2xl">
+                    <form id="contact-form">
+                        <div class="mb-4">
+                            <label for="nama" class="block text-gray-800 font-semibold mb-2">Nama Lengkap</label>
+                            <input type="text" id="nama" name="nama" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary transition duration-300" placeholder="Nama Anda" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-800 font-semibold mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary transition duration-300" placeholder="email@contoh.com" required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="pesan" class="block text-gray-800 font-semibold mb-2">Pesan Anda</label>
+                            <textarea id="pesan" name="pesan" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary transition duration-300" placeholder="Tuliskan pesan Anda di sini..." required></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3 bg-primary text-white font-bold rounded-xl shadow-md hover:bg-accent transition duration-300 transform hover:scale-[1.01]">
+                            Kirim Pesan
+                        </button>
+                        <p id="form-message" class="mt-4 text-center font-semibold hidden"></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Saranan Pintar -->
+    <div id="recommendation-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[100] hidden p-4" onclick="closeModal()">
+        <div class="bg-white p-8 rounded-xl shadow-2xl max-w-lg w-full transform transition-all duration-300 scale-100" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-primary flex items-center"><i data-lucide="wand-2" class="w-6 h-6 mr-2"></i> ✨ Saranan Menu Pintar</h3>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-red-500">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div id="modal-content">
+                <p class="text-gray-700 mb-4">Beritahu kami mood atau preferensi Anda, dan Gemini akan memberikan rekomendasi menu terbaik untuk Anda!</p>
+                <textarea id="preference-input" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary transition duration-300" placeholder="Contoh: Saya butuh yang manis dan dingin untuk cuaca Ternate yang panas."></textarea>
+                
+                <button id="generate-recommendation-btn" class="mt-4 w-full py-3 bg-accent text-white font-bold rounded-xl shadow-md hover:bg-primary transition duration-300 transform hover:scale-[1.01] flex items-center justify-center">
+                    <span id="generate-text">Dapatkan Saranan</span>
+                    <div id="loading-spinner" class="hidden spinner ml-2"></div>
+                </button>
+                
+                <div id="recommendation-result" class="mt-6 p-4 bg-secondary rounded-lg border-l-4 border-primary hidden">
+                    <p class="font-semibold text-accent mb-2">Rekomendasi dari Gemini:</p>
+                    <p id="result-text" class="text-gray-700 whitespace-pre-wrap"></p>
+                </div>
+
+                <p id="error-message" class="mt-4 text-sm text-red-600 hidden"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-accent text-white py-10">
+        <div class="container mx-auto px-4 text-center">
+            <div class="mb-6">
+                <h4 class="text-2xl font-bold mb-2">Big Brown Ternate</h4>
+                <p>Kopi, Camilan, dan Kebersamaan di jantung Maluku Utara.</p>
+            </div>
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" target="_blank" class="hover:text-primary transition duration-300">
+                    <i data-lucide="instagram" class="w-6 h-6"></i>
+                </a>
+                <a href="#" target="_blank" class="hover:text-primary transition duration-300">
+                    <i data-lucide="facebook" class="w-6 h-6"></i>
+                </a>
+                <a href="tel:08123456789" class="hover:text-primary transition duration-300">
+                    <i data-lucide="phone" class="w-6 h-6"></i>
+                </a>
+            </div>
+            <p class="text-sm text-gray-300">&copy; 2025 Big Brown Ternate. Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Menginisialisasi ikon Lucide
+        lucide.createIcons();
+
+        // --- Konfigurasi API Gemini ---
+        const apiKey = ""; // Dibiarkan kosong, akan diisi oleh runtime Canvas
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+        // Fungsi untuk menangani panggilan API dengan exponential backoff
+        async function fetchWithRetry(url, options, maxRetries = 5) {
+            let attempt = 0;
+            while (attempt < maxRetries) {
+                try {
+                    const response = await fetch(url, options);
+                    if (response.status === 429 || !response.ok) {
+                        // Jika status 429 (Too Many Requests) atau error lain, coba lagi
+                        throw new Error(`API call failed with status: ${response.statusText}`);
+                    }
+                    return await response.json();
+                } catch (error) {
+                    attempt++;
+                    if (attempt >= maxRetries) {
+                        throw new Error(`Gagal memanggil API setelah ${maxRetries} percobaan.`);
+                    }
+                    // Exponential backoff: 2^attempt * 1000ms
+                    const delay = Math.pow(2, attempt) * 1000;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    console.warn(`Percobaan ulang API ${attempt}/${maxRetries} setelah ${delay}ms...`);
+                }
+            }
+        }
+
+
+        // 1. Logika Data Menu
+        const menuData = {
+            kopi: [
+                { nama: "Kopi Susu Aren", deskripsi: "Espresso, susu segar, dan gula aren Maluku.", harga: "Rp 25.000" },
+                { nama: "Espresso Ternate", deskripsi: "Single origin kopi Ternate dengan rasa kuat.", harga: "Rp 20.000" },
+                { nama: "Americano Dingin", deskripsi: "Kopi hitam dingin yang menyegarkan.", harga: "Rp 22.000" },
+                { nama: "Caramel Latte", deskripsi: "Perpaduan klasik espresso, susu, dan sirup karamel.", harga: "Rp 30.000" }
+            ],
+            nonkopi: [
+                { nama: "Cokelat Panas Spesial", deskripsi: "Cokelat murni yang kaya dan hangat.", harga: "Rp 28.000" },
+                { nama: "Matcha Latte", deskripsi: "Minuman teh hijau Jepang yang creamy.", harga: "Rp 30.000" },
+                { nama: "Sunset Squash", deskripsi: "Minuman soda buah tropis khas Ternate.", harga: "Rp 27.000" },
+                { nama: "Red Velvet Blend", deskripsi: "Minuman dingin dengan rasa red velvet yang manis.", harga: "Rp 32.000" }
+            ],
+            camilan: [
+                { nama: "Roti Bakar Keju", deskripsi: "Roti panggang dengan taburan keju melimpah.", harga: "Rp 20.000" },
+                { nama: "Pisang Goreng Keju", deskripsi: "Pisang tanduk goreng renyah dengan topping keju.", harga: "Rp 18.000" },
+                { nama: "Kentang Goreng Big", deskripsi: "Kentang goreng porsi besar, disajikan dengan saus.", harga: "Rp 25.000" },
+                { nama: "Chicken Wings BBQ", deskripsi: "Sayap ayam renyah dengan bumbu BBQ khas.", harga: "Rp 35.000" }
+            ]
+        };
+
+        const menuContent = document.getElementById('menu-content');
+        const tabButtons = document.querySelectorAll('.tab-button');
+
+        /**
+         * Merender item menu ke dalam DOM.
+         * @param {string} category - Kategori menu yang akan ditampilkan ('kopi', 'nonkopi', 'camilan').
+         */
+        function renderMenu(category) {
+            menuContent.innerHTML = '';
+            const items = menuData[category];
+
+            if (!items) return;
+
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1';
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-3">
+                        <h4 class="text-xl font-bold text-accent">${item.nama}</h4>
+                        <span class="text-lg font-extrabold text-primary ml-4">${item.harga}</span>
+                    </div>
+                    <p class="text-gray-600 text-sm">${item.deskripsi}</p>
+                `;
+                menuContent.appendChild(card);
+            });
+        }
+
+        /**
+         * Mengubah kategori menu yang aktif.
+         * @param {Event} e - Event click dari tombol tab.
+         */
+        function changeCategory(e) {
+            const newCategory = e.currentTarget.dataset.category;
+            
+            // Hapus kelas 'active' dan styling non-aktif dari semua tombol
+            tabButtons.forEach(btn => {
+                btn.classList.remove('active', 'bg-primary', 'text-white');
+                btn.classList.add('text-primary', 'bg-secondary', 'hover:bg-primary', 'hover:text-white');
+            });
+
+            // Tambahkan kelas 'active' dan styling aktif ke tombol yang diklik
+            e.currentTarget.classList.add('active', 'bg-primary', 'text-white');
+            e.currentTarget.classList.remove('text-primary', 'bg-secondary', 'hover:bg-primary', 'hover:text-white');
+
+            // Render menu baru
+            renderMenu(newCategory);
+        }
+
+        // Tambahkan event listener ke semua tombol tab
+        tabButtons.forEach(button => {
+            button.addEventListener('click', changeCategory);
+        });
+
+        // Tampilkan menu Kopi (default) saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMenu('kopi');
+        });
+
+        // 2. Logika Navigasi Mobile (Hamburger)
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+        const closeMenu = document.getElementById('close-menu');
+
+        function openMobileMenu() {
+            mobileMenuOverlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Nonaktifkan scroll body
+        }
+
+        function closeMobileMenu() {
+            mobileMenuOverlay.classList.add('hidden');
+            document.body.style.overflow = ''; // Aktifkan kembali scroll body
+        }
+
+        hamburger.addEventListener('click', openMobileMenu);
+        closeMenu.addEventListener('click', closeMobileMenu);
+
+        // 3. Logika Formulir Kontak Sederhana
+        const contactForm = document.getElementById('contact-form');
+        const formMessage = document.getElementById('form-message');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simulasikan pengiriman data
+            formMessage.classList.remove('hidden', 'text-red-600');
+            formMessage.classList.add('text-green-600');
+            formMessage.textContent = 'Pesan Anda berhasil terkirim! Kami akan segera merespons. Terima kasih.';
+
+            // Reset formulir setelah 3 detik
+            setTimeout(() => {
+                contactForm.reset();
+                formMessage.classList.add('hidden');
+            }, 3000);
+        });
+        
+        // 4. Logika Saranan Menu Pintar (Gemini API Integration)
+        const recommendationModal = document.getElementById('recommendation-modal');
+        const smartSuggestionBtn = document.getElementById('smart-suggestion-btn');
+        const generateRecommendationBtn = document.getElementById('generate-recommendation-btn');
+        const preferenceInput = document.getElementById('preference-input');
+        const recommendationResult = document.getElementById('recommendation-result');
+        const resultText = document.getElementById('result-text');
+        const generateText = document.getElementById('generate-text');
+        const loadingSpinner = document.getElementById('loading-spinner');
+        const errorMessage = document.getElementById('error-message');
+
+        function openModal() {
+            recommendationModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            // Reset state
+            preferenceInput.value = '';
+            recommendationResult.classList.add('hidden');
+            errorMessage.classList.add('hidden');
+            generateRecommendationBtn.disabled = false;
+            generateText.textContent = 'Dapatkan Saranan';
+            loadingSpinner.classList.add('hidden');
+        }
+
+        function closeModal() {
+            recommendationModal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        smartSuggestionBtn.addEventListener('click', openModal);
+
+        generateRecommendationBtn.addEventListener('click', async () => {
+            const preference = preferenceInput.value.trim();
+            if (preference.length < 5) {
+                errorMessage.textContent = 'Harap masukkan preferensi yang lebih spesifik (minimal 5 karakter).';
+                errorMessage.classList.remove('hidden');
+                return;
+            }
+
+            // Tampilkan loading state
+            generateRecommendationBtn.disabled = true;
+            generateText.textContent = 'Menganalisis...';
+            loadingSpinner.classList.remove('hidden');
+            recommendationResult.classList.add('hidden');
+            errorMessage.classList.add('hidden');
+            resultText.textContent = '';
+
+
+            // Gabungkan semua data menu menjadi satu string untuk prompt
+            const menuPrompt = JSON.stringify(menuData, null, 2);
+
+            const systemPrompt = "Anda adalah seorang Barista dan Pakar Menu yang ramah dan sangat mengerti rasa. Tugas Anda adalah menganalisis preferensi pelanggan dan data menu yang diberikan untuk merekomendasikan SATU item menu terbaik. Balas dalam bahasa Indonesia yang meyakinkan, ramah, dan ringkas. Sertakan nama menu, harga, dan alasan mengapa menu tersebut paling cocok. Jangan merekomendasikan item yang tidak ada dalam daftar menu.";
+
+            const userQuery = `Daftar Menu: \n---\n${menuPrompt}\n---\n Preferensi Pelanggan: "${preference}". Berikan rekomendasi menu terbaik Anda.`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+            };
+
+            try {
+                const response = await fetchWithRetry(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const candidate = response.candidates?.[0];
+                let text = "Maaf, kami gagal mendapatkan rekomendasi menu. Silakan coba lagi.";
+
+                if (candidate && candidate.content?.parts?.[0]?.text) {
+                    text = candidate.content.parts[0].text;
+                }
+
+                resultText.textContent = text;
+                recommendationResult.classList.remove('hidden');
+
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                errorMessage.textContent = 'Terjadi kesalahan saat menghubungi server rekomendasi. Silakan coba sebentar lagi.';
+                errorMessage.classList.remove('hidden');
+                recommendationResult.classList.add('hidden');
+            } finally {
+                // Sembunyikan loading state
+                generateRecommendationBtn.disabled = false;
+                generateText.textContent = 'Dapatkan Saranan Lagi';
+                loadingSpinner.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
